@@ -2,6 +2,8 @@ import { render, screen } from '@testing-library/react';
 import { WeatherCard } from '../WeatherCard';
 import { useTemperature } from '../../contexts/TemperatureContext';
 import { WeatherData } from '../../services/weatherService';
+import { BrowserRouter } from 'react-router-dom';
+import { ThemeProvider } from '../../contexts/ThemeContext';
 
 jest.mock('../../contexts/TemperatureContext');
 
@@ -28,6 +30,16 @@ const mockWeatherData = {
   },
 } as WeatherData;
 
+const renderWithProviders = (component: React.ReactNode) => {
+  return render(
+    <BrowserRouter>
+      <ThemeProvider>
+        {component}
+      </ThemeProvider>
+    </BrowserRouter>
+  );
+};
+
 describe('WeatherCard', () => {
   beforeEach(() => {
     (useTemperature as jest.Mock).mockReturnValue({
@@ -37,7 +49,13 @@ describe('WeatherCard', () => {
   });
 
   it('renders weather information correctly', () => {
-    render(<WeatherCard data={mockWeatherData} temperatureUnit="celsius" convertTemperature={(temp) => Math.round(temp)} />);
+    renderWithProviders(
+      <WeatherCard 
+        data={mockWeatherData} 
+        temperatureUnit="celsius" 
+        convertTemperature={(temp) => Math.round(temp)} 
+      />
+    );
     
     expect(screen.getByText('Istanbul')).toBeInTheDocument();
     expect(screen.getByText('20°C')).toBeInTheDocument();
@@ -50,7 +68,13 @@ describe('WeatherCard', () => {
       convertTemperature: (temp: number) => Math.round((temp * 9/5) + 32),
     });
 
-    render(<WeatherCard data={mockWeatherData} temperatureUnit="fahrenheit" convertTemperature={(temp) => Math.round((temp * 9/5) + 32)} />);
+    renderWithProviders(
+      <WeatherCard 
+        data={mockWeatherData} 
+        temperatureUnit="fahrenheit" 
+        convertTemperature={(temp) => Math.round((temp * 9/5) + 32)} 
+      />
+    );
     
     expect(screen.getByText('68°F')).toBeInTheDocument();
   });
