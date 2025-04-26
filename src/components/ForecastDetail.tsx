@@ -101,23 +101,35 @@ export const ForecastDetail: React.FC<ForecastDetailProps> = ({
   const { theme } = useTheme();
 
   const hourlyForecasts = data.list.filter(forecast => {
-    const forecastDate = new Date(forecast.dt * 1000).toLocaleDateString();
+    const forecastDate = new Date(forecast.dt * 1000).toISOString().split('T')[0];
     return forecastDate === selectedDate;
   });
 
   const formatTime = (timestamp: number) => {
-    return new Date(timestamp * 1000).toLocaleTimeString(i18n.language, { 
+    const date = new Date(timestamp * 1000);
+    const options: Intl.DateTimeFormatOptions = { 
       hour: '2-digit', 
       minute: '2-digit' 
-    });
+    };
+    return new Intl.DateTimeFormat(i18n.language, options).format(date);
   };
 
   const formatDate = (date: string) => {
-    return new Date(date).toLocaleDateString(i18n.language, { 
+    const dateObj = new Date(date);
+    const options: Intl.DateTimeFormatOptions = { 
       weekday: 'long', 
       day: 'numeric', 
       month: 'long' 
-    });
+    };
+
+    if (i18n.language === 'az') {
+      const day = dateObj.getDate();
+      const month = dateObj.toLocaleString('az', { month: 'long' });
+      const weekday = dateObj.toLocaleString('az', { weekday: 'long' });
+      return `${day} ${month}, ${weekday}`;
+    }
+
+    return new Intl.DateTimeFormat(i18n.language, options).format(dateObj);
   };
 
   return (

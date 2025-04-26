@@ -98,11 +98,20 @@ export const ForecastList: React.FC<ForecastListProps> = ({ data, temperatureUni
 
   const formatDate = (dt: number) => {
     const date = new Date(dt * 1000);
-    return date.toLocaleDateString(i18n.language, { 
+    const options: Intl.DateTimeFormatOptions = { 
       weekday: 'long', 
       day: 'numeric', 
       month: 'long' 
-    });
+    };
+
+    if (i18n.language === 'az') {
+      const day = date.getDate();
+      const month = date.toLocaleString('az', { month: 'long' });
+      const weekday = date.toLocaleString('az', { weekday: 'long' });
+      return `${day} ${month}, ${weekday}`;
+    }
+
+    return new Intl.DateTimeFormat(i18n.language, options).format(date);
   };
 
   return (
@@ -113,7 +122,10 @@ export const ForecastList: React.FC<ForecastListProps> = ({ data, temperatureUni
           <ForecastCard 
             key={index} 
             theme={theme}
-            onClick={() => setSelectedDate(new Date(forecast.dt * 1000).toLocaleDateString())}
+            onClick={() => {
+              const date = new Date(forecast.dt * 1000);
+              setSelectedDate(date.toISOString().split('T')[0]);
+            }}
           >
             <DateText>{formatDate(forecast.dt)}</DateText>
             <WeatherIcon
