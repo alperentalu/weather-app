@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="512" height="512" viewBox="0 0 512 512" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Bulut -->
+  <path d="M400 160C400 106.98 357.02 64 304 64C273.2 64 245.6 77.6 227.2 100C213.6 98.4 199.2 97.6 184 97.6C118.4 97.6 64 152 64 217.6C64 283.2 118.4 337.6 184 337.6H400C444.2 337.6 480 301.8 480 257.6C480 213.4 444.2 177.6 400 177.6C400 170.4 400 163.2 400 160Z" fill="#4A90E2"/>
+  
+  <!-- Güneş -->
+  <circle cx="304" cy="160" r="40" fill="#FFD700"/>
+  <path d="M304 80V100" stroke="#FFD700" stroke-width="8"/>
+  <path d="M304 220V240" stroke="#FFD700" stroke-width="8"/>
+  <path d="M384 160H364" stroke="#FFD700" stroke-width="8"/>
+  <path d="M244 160H224" stroke="#FFD700" stroke-width="8"/>
+  <path d="M354 90L338 106" stroke="#FFD700" stroke-width="8"/>
+  <path d="M270 214L254 230" stroke="#FFD700" stroke-width="8"/>
+  <path d="M354 230L338 214" stroke="#FFD700" stroke-width="8"/>
+  <path d="M270 106L254 90" stroke="#FFD700" stroke-width="8"/>
+</svg> 
