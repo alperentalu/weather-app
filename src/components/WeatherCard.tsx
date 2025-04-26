@@ -11,22 +11,48 @@ const Card = styled(motion.div)`
   border-radius: 10px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   cursor: pointer;
+  width: 100%;
+  overflow: hidden;
+
+  @media (max-width: 480px) {
+    padding: 15px;
+  }
 `;
 
 const CityName = styled(motion.h2)`
   color: ${props => props.theme === 'dark' ? '#ffffff' : '#333333'};
   margin: 0 0 10px 0;
+  font-size: 1.5em;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+
+  @media (max-width: 480px) {
+    font-size: 1.2em;
+  }
 `;
 
 const Temperature = styled(motion.div)`
   font-size: 2.5em;
   color: ${props => props.theme === 'dark' ? '#ffffff' : '#333333'};
   margin: 10px 0;
+  white-space: nowrap;
+
+  @media (max-width: 480px) {
+    font-size: 2em;
+  }
 `;
 
 const Description = styled(motion.div)`
   color: ${props => props.theme === 'dark' ? '#cccccc' : '#666666'};
   text-transform: capitalize;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+
+  @media (max-width: 480px) {
+    font-size: 0.9em;
+  }
 `;
 
 interface WeatherCardProps {

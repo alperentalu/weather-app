@@ -12,6 +12,12 @@ const Container = styled.div`
   padding: 8px 12px;
   border-radius: 20px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  flex-wrap: wrap;
+
+  @media (max-width: 480px) {
+    padding: 6px 10px;
+    gap: 5px;
+  }
 `;
 
 const Label = styled.span`
@@ -20,6 +26,11 @@ const Label = styled.span`
   display: flex;
   align-items: center;
   gap: 5px;
+  white-space: nowrap;
+
+  @media (max-width: 480px) {
+    font-size: 0.8em;
+  }
 `;
 
 const Button = styled.button<{ active: boolean }>`
@@ -36,6 +47,13 @@ const Button = styled.button<{ active: boolean }>`
   align-items: center;
   gap: 5px;
   font-weight: ${props => props.active ? '600' : '400'};
+  white-space: nowrap;
+  font-size: 0.9em;
+
+  @media (max-width: 480px) {
+    padding: 4px 8px;
+    font-size: 0.8em;
+  }
 
   &:hover {
     background: ${props => props.theme === 'dark' ? '#5a5a5a' : '#e0e0e0'};
@@ -44,6 +62,10 @@ const Button = styled.button<{ active: boolean }>`
 
 const Icon = styled.span`
   font-size: 1.2em;
+
+  @media (max-width: 480px) {
+    font-size: 1em;
+  }
 `;
 
 export const TemperatureUnitSelector: React.FC = () => {
