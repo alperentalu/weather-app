@@ -3,6 +3,7 @@ import styled from '@emotion/styled';
 import { useTranslation } from 'react-i18next';
 import { useTheme } from '../contexts/ThemeContext';
 import { ForecastData } from '../services/weatherService';
+import { formatDateForAzerbaijani } from '../utils/dateFormat';
 
 interface ForecastDetailProps {
   data: ForecastData;
@@ -123,10 +124,7 @@ export const ForecastDetail: React.FC<ForecastDetailProps> = ({
     };
 
     if (i18n.language === 'az') {
-      const day = dateObj.getDate();
-      const month = dateObj.toLocaleString('az', { month: 'long' });
-      const weekday = dateObj.toLocaleString('az', { weekday: 'long' });
-      return `${day} ${month}, ${weekday}`;
+      return formatDateForAzerbaijani(dateObj);
     }
 
     return new Intl.DateTimeFormat(i18n.language, options).format(dateObj);
