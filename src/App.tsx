@@ -5,6 +5,7 @@ import { DetailPage } from './pages/DetailPage';
 import { ThemeProvider } from './contexts/ThemeContext';
 import { LanguageProvider } from './contexts/LanguageContext';
 import { TemperatureProvider } from './contexts/TemperatureContext';
+import './utils/leaflet';
 
 const queryClient = new QueryClient();
 
