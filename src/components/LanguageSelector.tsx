@@ -1,6 +1,5 @@
 import React from 'react';
 import styled from '@emotion/styled';
-import { useTranslation } from 'react-i18next';
 import { useLanguage } from '../contexts/LanguageContext';
 import { useTheme } from '../contexts/ThemeContext';
 
@@ -25,22 +24,7 @@ const Select = styled.select`
   }
 `;
 
-const LanguageButton = styled.button`
-  padding: 8px 16px;
-  background: ${props => props.theme === 'dark' ? '#4a4a4a' : '#f0f0f0'};
-  border: none;
-  border-radius: 5px;
-  color: ${props => props.theme === 'dark' ? '#ffffff' : '#333333'};
-  cursor: pointer;
-  transition: all 0.3s ease;
-
-  &:hover {
-    background: ${props => props.theme === 'dark' ? '#5a5a5a' : '#e0e0e0'};
-  }
-`;
-
 export const LanguageSelector: React.FC = () => {
-  const { t } = useTranslation();
   const { language, changeLanguage } = useLanguage();
   const { theme } = useTheme();
 
