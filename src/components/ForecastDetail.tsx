@@ -97,7 +97,7 @@ export const ForecastDetail: React.FC<ForecastDetailProps> = ({
   temperatureUnit,
   convertTemperature 
 }) => {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
   const { theme } = useTheme();
 
   const hourlyForecasts = data.list.filter(forecast => {
@@ -106,14 +106,25 @@ export const ForecastDetail: React.FC<ForecastDetailProps> = ({
   });
 
   const formatTime = (timestamp: number) => {
-    return new Date(timestamp * 1000).toLocaleTimeString('tr-TR', { hour: '2-digit', minute: '2-digit' });
+    return new Date(timestamp * 1000).toLocaleTimeString(i18n.language, { 
+      hour: '2-digit', 
+      minute: '2-digit' 
+    });
+  };
+
+  const formatDate = (date: string) => {
+    return new Date(date).toLocaleDateString(i18n.language, { 
+      weekday: 'long', 
+      day: 'numeric', 
+      month: 'long' 
+    });
   };
 
   return (
     <Overlay onClick={onClose}>
       <Modal theme={theme} onClick={e => e.stopPropagation()}>
         <CloseButton onClick={onClose} theme={theme}>×</CloseButton>
-        <Title theme={theme}>{new Date(selectedDate).toLocaleDateString('tr-TR', { weekday: 'long', day: 'numeric', month: 'long' })}</Title>
+        <Title theme={theme}>{formatDate(selectedDate)}</Title>
         <HourlyGrid>
           {hourlyForecasts.map((forecast, index) => (
             <HourlyCard key={index} theme={theme}>

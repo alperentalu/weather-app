@@ -86,7 +86,7 @@ const WeatherIcon = styled.img`
 `;
 
 export const ForecastList: React.FC<ForecastListProps> = ({ data, temperatureUnit, convertTemperature }) => {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
   const { theme } = useTheme();
   const [selectedDate, setSelectedDate] = useState<string | null>(null);
 
@@ -97,7 +97,12 @@ export const ForecastList: React.FC<ForecastListProps> = ({ data, temperatureUni
   });
 
   const formatDate = (dt: number) => {
-    return new Date(dt * 1000).toLocaleDateString([], { weekday: 'long', day: 'numeric', month: 'long' });
+    const date = new Date(dt * 1000);
+    return date.toLocaleDateString(i18n.language, { 
+      weekday: 'long', 
+      day: 'numeric', 
+      month: 'long' 
+    });
   };
 
   return (
